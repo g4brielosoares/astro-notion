@@ -120,7 +120,9 @@ function getPageMeta(page) {
     page.last_edited_time ||
     "";
 
-  const author = authorName(props.Autor) || page.created_by?.name || page.last_edited_by?.name || "";
+  const author =
+    authorName(props.Autor) ||
+    "";
 
   const coverUrl = getCoverUrlFromPage(page);
 
