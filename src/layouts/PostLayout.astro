@@ -5,23 +5,28 @@ import Layout from "./Layout.astro";
 import FormattedDate from "@/components/primitives/content/FormattedDate.astro";
 import Container from "@/components/primitives/layout/Container.astro";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import placeholder from "@/assets/post-placeholder.png";
 
-type Props = {
+export type Props = {
   title: string;
+  slug?: string;
   description?: string;
-  publishedAt: Date;
-  lastEditedAt?: Date;
+  pubDate: Date;
+  updatedDate?: Date;
   cover?: ImageMetadata;
   author?: string;
   tags?: string[];
+  coverAlt?: string;
 };
 
 const {
   title,
+  pubDate,
   description,
-  publishedAt,
-  lastEditedAt,
-  cover,
+  updatedDate,
+  cover = placeholder,
+  coverAlt = title,
   author,
   tags = [],
 } = Astro.props;
@@ -35,7 +40,7 @@ const {
           <Image
             width={1000}
             src={cover}
-            alt={title}
+            alt={coverAlt}
             decoding="async"
             format="webp"
             class="w-full aspect-video object-cover object-center xl:rounded-xl"
@@ -48,19 +53,18 @@ const {
       >
         <div class="space-y-1">
           {
-            publishedAt && (
+            pubDate && (
               <div>
-                Criado em <FormattedDate date={publishedAt} />
+                Criado em <FormattedDate date={pubDate} />
               </div>
             )
           }
           {
-            lastEditedAt &&
-              lastEditedAt.getDate() !== publishedAt.getDate() && (
-                <div>
-                  Atualizado em <FormattedDate date={lastEditedAt} />
-                </div>
-              )
+            updatedDate && updatedDate.getDate() !== pubDate.getDate() && (
+              <div>
+                Atualizado em <FormattedDate date={updatedDate} />
+              </div>
+            )
           }
         </div>
         {author && <span>Por {author}</span>}

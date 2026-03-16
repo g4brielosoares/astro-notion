@@ -25,7 +25,7 @@ const posts: CollectionEntry<"blog">[] = allPosts
           <PostItem
             title={post.data.title}
             slug={`/blog/${post.data.slug}/`}
-            cover={post.data.cover?.src}
+            cover={post.data.cover}
             pubDate={post.data.pubDate}
             transition:name="listing"
             transition:animate="fade"

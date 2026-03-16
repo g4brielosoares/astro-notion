@@ -1,14 +1,24 @@
 ---
 import FormattedDate from "@/components/primitives/content/FormattedDate.astro";
+import placeholder from "@/assets/post-placeholder.png";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
-  cover?: string;
-  slug: string;
   title: string;
+  slug: string;
   pubDate: Date;
+  cover?: ImageMetadata;
+  coverAlt?: string;
 }
 
-const { cover, slug, title, pubDate } = Astro.props;
+const {
+  title,
+  slug,
+  pubDate,
+  cover = placeholder,
+  coverAlt = title,
+} = Astro.props;
 ---
 
 <article
@@ -18,12 +28,13 @@ const { cover, slug, title, pubDate } = Astro.props;
     {
       cover && (
         <div class="overflow-hidden rounded-xl aspect-5/3 transition duration-400">
-          <img
+          <Image
             width={480}
             src={cover}
-            alt="Imagem Destaque"
+            alt={coverAlt}
             decoding="async"
             loading="lazy"
+            format="webp"
             class="scale-105 group-hover:scale-100 transition duration-400 object-cover w-full h-full"
           />
         </div>

@@ -21,10 +21,10 @@ const { Content } = await render(post);
 
 <PostLayout
   title={post.data.title}
-  description=""
-  publishedAt={post.data.pubDate}
-  lastEditedAt={post.data.updatedDate}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
   cover={post.data.cover}
+  coverAlt={post.data.coverAlt}
 >
   <Content />
 </PostLayout>
