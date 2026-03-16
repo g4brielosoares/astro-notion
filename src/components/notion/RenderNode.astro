@@ -1,0 +1,183 @@
+---
+import RenderNodes from "./RenderNodes.astro";
+const { node } = Astro.props;
+
+function textToHtml(parts: any[] = []) {
+  return parts
+    .map((part) => {
+      let html = part.text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+
+      if (part.code) html = `<code>${html}</code>`;
+      if (part.bold) html = `<strong>${html}</strong>`;
+      if (part.italic) html = `<em>${html}</em>`;
+      if (part.underline) html = `<u>${html}</u>`;
+      if (part.strikethrough) html = `<s>${html}</s>`;
+      if (part.href)
+        html = `<a href="${part.href}" target="_blank" rel="noopener noreferrer">${html}</a>`;
+
+      return html;
+    })
+    .join("");
+}
+---
+
+{node.kind === "paragraph" && <p set:html={textToHtml(node.text)} />}
+{node.kind === "heading-1" && <h1 set:html={textToHtml(node.text)} />}
+{node.kind === "heading-2" && <h2 set:html={textToHtml(node.text)} />}
+{node.kind === "heading-3" && <h3 set:html={textToHtml(node.text)} />}
+{node.kind === "quote" && <blockquote set:html={textToHtml(node.text)} />}
+{node.kind === "divider" && <hr />}
+
+{
+  node.kind === "bulleted-list" && (
+    <ul>
+      {node.items.map((item: any) => (
+        <Astro.self node={item} />
+      ))}
+    </ul>
+  )
+}
+
+{
+  node.kind === "numbered-list" && (
+    <ol>
+      {node.items.map((item: any) => (
+        <Astro.self node={item} />
+      ))}
+    </ol>
+  )
+}
+
+{
+  node.kind === "list-item" && (
+    <li>
+      <span set:html={textToHtml(node.text)} />
+      {node.children?.length > 0 && <RenderNodes nodes={node.children} />}
+    </li>
+  )
+}
+
+{
+  node.kind === "todo" && (
+    <div>
+      <label>
+        <input type="checkbox" checked={node.checked} disabled />
+        <span set:html={textToHtml(node.text)} />
+      </label>
+      {node.children?.length > 0 && <RenderNodes nodes={node.children} />}
+    </div>
+  )
+}
+
+{
+  node.kind === "toggle" && (
+    <details>
+      <summary set:html={textToHtml(node.text)} />
+      {node.children?.length > 0 && <RenderNodes nodes={node.children} />}
+    </details>
+  )
+}
+
+{
+  node.kind === "callout" && (
+    <div class="notion-callout">
+      <div>{node.icon || "💡"}</div>
+      <div>
+        <div set:html={textToHtml(node.text)} />
+        {node.children?.length > 0 && <RenderNodes nodes={node.children} />}
+      </div>
+    </div>
+  )
+}
+
+{
+  node.kind === "code" && (
+    <pre>
+      <code>{node.code}</code>
+    </pre>
+  )
+}
+
+{
+  node.kind === "image" && node.src && (
+    <figure>
+      <img src={node.src} alt="" />
+      {node.caption?.length > 0 && (
+        <figcaption set:html={textToHtml(node.caption)} />
+      )}
+    </figure>
+  )
+}
+
+{
+  node.kind === "video" && node.src && (
+    <figure>
+      <video src={node.src} controls />
+      {node.caption?.length > 0 && (
+        <figcaption set:html={textToHtml(node.caption)} />
+      )}
+    </figure>
+  )
+}
+
+{node.kind === "embed" && node.url && <iframe src={node.url} loading="lazy" />}
+{
+  node.kind === "bookmark" && node.url && (
+    <p>
+      <a href={node.url}>{node.url}</a>
+    </p>
+  )
+}
+{
+  node.kind === "file" && node.url && (
+    <p>
+      <a href={node.url}>{node.label}</a>
+    </p>
+  )
+}
+{
+  node.kind === "pdf" && node.url && (
+    <p>
+      <a href={node.url}>Abrir PDF</a>
+    </p>
+  )
+}
+
+{
+  node.kind === "table" && (
+    <table>
+      <tbody>
+        {node.rows.map((row: any) => (
+          <tr>
+            {row.map((cell: any[]) => (
+              <td
+                set:html={textToHtml(
+                  cell.map((c: any) => ({
+                    text: c.plain_text ?? "",
+                    href: c.href || c.text?.link?.url || null,
+                    bold: c.annotations?.bold ?? false,
+                    italic: c.annotations?.italic ?? false,
+                    underline: c.annotations?.underline ?? false,
+                    strikethrough: c.annotations?.strikethrough ?? false,
+                    code: c.annotations?.code ?? false,
+                  })),
+                )}
+              />
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+{
+  node.kind === "unsupported" && (
+    <div>
+      <small>Bloco não tratado: {node.blockType}</small>
+    </div>
+  )
+}

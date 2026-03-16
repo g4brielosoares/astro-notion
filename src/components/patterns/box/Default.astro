@@ -1,0 +1,10 @@
+---
+import type { Props } from "./index.astro";
+
+const { title, class: className } = Astro.props;
+---
+
+<article class:list={[className, "bg-[#4E4855] rounded-lg p-5 space-y-5"]}>
+  {title && <h4 class="text-white text-2xl">{title}</h4>}
+  <slot />
+</article>

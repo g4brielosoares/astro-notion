@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import PostLayout from "@/layouts/PostLayout.astro";
+
+export async function getStaticPaths() {
+  const allPosts: CollectionEntry<"blog">[] = await getCollection("blog");
+
+  const posts = allPosts.filter(
+    (post) => post.data.status?.toLowerCase() === "publicado",
+  );
+
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
+const { Content } = await render(post);
+---
+
+<PostLayout
+  title={post.data.title}
+  description=""
+  publishedAt={post.data.pubDate}
+  lastEditedAt={post.data.updatedDate}
+  cover={post.data.cover}
+>
+  <Content />
+</PostLayout>

@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #2337ff;
+  --color-accent-dark: #000d8a;
+  --color-black: rgb(14, 14, 14);
+
+  --font-atkinson: "Atkinson", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+
+  --shadow-bear:
+    0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33),
+    0 16px 32px rgba(96, 115, 159, 0.33);
+
+  --shadow-alt:
+    0 2px 6px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.12),
+    0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+@layer base {
+  @font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply leading-none font-jetbrains font-bold text-transparent bg-clip-text bg-linear-to-r from-[#DE386B] to-[#E93FF1];
+  }
+
+  h1 {
+    @apply text-4xl md:text-7xl;
+  }
+  h2 {
+    @apply text-3xl md:text-6xl;
+  }
+  h3 {
+    @apply text-2xl md:text-5xl;
+  }
+  h4 {
+    @apply text-xl md:text-4xl;
+  }
+  h5 {
+    @apply text-lg md:text-3xl;
+  }
+
+  ul,
+  ol {
+    @apply pl-10;
+  }
+
+  ul li {
+    @apply list-disc;
+  }
+
+  ol li {
+    @apply list-decimal;
+  }
+
+  strong {
+    @apply font-black;
+  }
+
+  p,
+  li {
+    @apply leading-normal text-xl;
+  }
+}
+
+table {
+  @apply w-full;
+}
+
+td,
+th {
+  @apply text-left py-3 px-5;
+}
+
+tr {
+  @apply even:bg-[#352E3D];
+}
+
+thead th {
+  @apply bg-[#352E3D];
+}

@@ -1,0 +1,39 @@
+---
+import FormattedDate from "@/components/primitives/content/FormattedDate.astro";
+
+interface Props {
+  cover?: string;
+  slug: string;
+  title: string;
+  pubDate: Date;
+}
+
+const { cover, slug, title, pubDate } = Astro.props;
+---
+
+<article
+  class="group transition-all duration-400 hover:scale-102 list-none hover:bg-zinc-900 rounded-xl"
+>
+  <a href={slug}>
+    {
+      cover && (
+        <div class="overflow-hidden rounded-xl aspect-5/3 transition duration-400">
+          <img
+            width={480}
+            src={cover}
+            alt="Imagem Destaque"
+            decoding="async"
+            loading="lazy"
+            class="scale-105 group-hover:scale-100 transition duration-400 object-cover w-full h-full"
+          />
+        </div>
+      )
+    }
+    <div class="p-3 md:p-4 space-y-1 md:space-y-2">
+      <h4>{title}</h4>
+      <p class="text-sm md:text-lg">
+        <FormattedDate date={pubDate} />
+      </p>
+    </div>
+  </a>
+</article>

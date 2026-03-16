@@ -1,0 +1,263 @@
+---
+import Box, { type Variants } from "@/components/patterns/box/Box.astro";
+import Slide from "@/components/patterns/Slide.astro";
+import Layout from "@/layouts/Layout.astro";
+import Accordion from "@/components/patterns/accordion/Accordion.astro";
+import AccordionItem from "@/components/patterns/accordion/AccordionItem.astro";
+import logoG from "@/assets/logo-g.svg";
+
+import SlidesData from "@/content/data/home/slides.data.json";
+import { Image } from "astro:assets";
+import Container from "@/components/primitives/layout/Container.astro";
+
+interface Content {
+  title?: string;
+  content: string;
+  className?: string;
+  variant?: Variants;
+}
+---
+
+<Layout>
+  <Container class="space-y-6 md:space-y-10 py-30">
+    <Image
+      width="1000"
+      src={logoG}
+      alt="astro"
+      class="mx-auto my-30 xl:my-50"
+    />
+
+    <Slide title="O Desafio" indicatorText="Slide 1">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {
+          (SlidesData.Slide1 as Content[]).map((caixa) => (
+            <Box
+              title={caixa.title}
+              class={caixa.className}
+              variant={caixa.variant}
+            >
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+      <Accordion variant="rounded">
+        <AccordionItem title="O que é o Astro?">
+          <p>O Astro é um framework web focado em conteúdo e performance.</p>
+        </AccordionItem>
+        <AccordionItem title="Posso usar componentes dinâmicos?">
+          <p class="mb-2">Sim! Veja este componente sendo injetado:</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {
+              (SlidesData.Slide3 as Content[]).map((caixa) => (
+                <Box
+                  title={caixa.title}
+                  class={caixa.className}
+                  variant="WhiteHead"
+                >
+                  <p set:html={caixa.content} />
+                </Box>
+              ))
+            }
+          </div>
+        </AccordionItem>
+        <AccordionItem title="E suporte a imagens?">
+          <img
+            src="https://picsum.photos/400/200"
+            alt="Exemplo"
+            class="rounded-lg mt-2"
+          />
+        </AccordionItem>
+      </Accordion>
+    </Slide>
+
+    <Slide title="Por que o Astro é tão Ágil?" indicatorText="Slide 2">
+      <ul class="space-y-5 text-2xl pl-10">
+        <li>
+          <strong>Filosofia "Zero JavaScript":</strong> O Astro remove todo o código
+          pesado e envia apenas HTML puro para o navegador.
+        </li>
+        <li>
+          <strong>Build Estático:</strong> O site é "pré-fabricado" no momento da
+          criação. Quando o cliente clica, o site já está pronto, sem precisar "pensar".
+        </li>
+        <li>
+          <strong>Performance Incomparável:</strong> Ideal para Landing Pages (LPs)
+          e Sites Institucionais que precisam converter visitantes em segundos.
+        </li>
+      </ul>
+    </Slide>
+
+    <Slide title="SEO: O Melhor Amigo do Google" indicatorText="Slide 3">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {
+          (SlidesData.Slide3 as Content[]).map((caixa) => (
+            <Box
+              title={caixa.title}
+              class={caixa.className}
+              variant="WhiteHead"
+            >
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+
+    <Slide
+      title="Versatilidade: Use o Melhor de Cada Mundo"
+      indicatorText="Slide 4"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {
+          (SlidesData.Slide4 as Content[]).map((caixa, index) => (
+            <Box
+              title={caixa.title}
+              class={caixa.className}
+              variant="NumberCircle"
+              index={`${++index}`}
+            >
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+
+    <Slide
+      title="Roteamento Inteligente"
+      indicatorText="Slide 5"
+      imageSRC="https://cdn.gamma.app/fzd9z4zd3y750c3/generated-images/obvHNvgKKhPcudzueCY6r.jpg"
+      imgSide="right"
+    >
+      <h5>(Baseado em Arquivos)</h5>
+      <div class="grid grid-cols-1 gap-5">
+        {
+          (SlidesData.Slide5 as Content[]).map((caixa, index) => (
+            <Box
+              title={caixa.title}
+              class={caixa.className}
+              variant="NumberLine"
+              index={`${index <= 9 && "0"}${++index}`}
+            >
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+
+    <Slide
+      title="O Segredo: Arquitetura de Ilhas (Islands)"
+      indicatorText="Slide 6"
+    >
+      <div
+        class="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 md:grid-flow-col gap-5 justify-center items-center"
+      >
+        {
+          (SlidesData.Slide6 as Content[]).map((caixa) => (
+            <Box title={caixa.title} class={caixa.className} variant="Naked">
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+
+    <Slide title="Criação de Páginas Estáticas (Build)" indicatorText="Slide 7">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {
+          (SlidesData.Slide7 as Content[]).map((caixa) => (
+            <Box title={caixa.title} class={caixa.className} variant="Naked">
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+
+    <Slide
+      title="Astro vs. WordPress: A Escolha Inteligente para Seu Negócio"
+      indicatorText="Slide 8"
+    >
+      <p>
+        Trocar WordPress por Astro é como trocar um carro antigo e pesado, que
+        exige manutenção constante, por um veículo de corrida moderno, leve e
+        totalmente personalizado.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {
+          (SlidesData.Slide8 as Content[]).map((caixa, index) => (
+            <Box
+              title={caixa.title}
+              index={`${index <= 9 && "0"}${++index}`}
+              variant="NumberLine"
+            >
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+      <div
+        class="overflow-x-auto rounded-lg border-2 border-[#4E4855] overscroll-x-none"
+      >
+        <table>
+          <colgroup>
+            <col class="w-1/4" />
+            <col class="w-1/3" />
+            <col class="w-1/3" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">Critério</th>
+              <th scope="col">WordPress</th>
+              <th scope="col">Astro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Velocidade Inicial</th>
+              <td>Média/Baixa</td>
+              <td>Instantânea</td>
+            </tr>
+            <tr>
+              <th scope="row">Segurança</th>
+              <td>Depende de plugins</td>
+              <td>Nativa e Alta</td>
+            </tr>
+            <tr>
+              <th scope="row">Liberdade Criativa</th>
+              <td>Limitada pelo Tema</td>
+              <td>Total e Absoluta</td>
+            </tr>
+            <tr>
+              <th scope="row">Auxílio de IA</th>
+              <td>Difícil (menos código e código legado)</td>
+              <td>Excelente (código moderno)</td>
+            </tr>
+            <tr>
+              <th scope="row">Custo de Servidor</th>
+              <td>R$ 50 - R$ 200/mês</td>
+              <td>R$ 0 - R$ 20/mês</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Slide>
+
+    <Slide
+      title="Desvendando o Astro: FAQ"
+      indicatorText="Perguntas Frequentes"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {
+          (SlidesData.SlideFAQ as Content[]).map((caixa, index) => (
+            <Box title={caixa.title} index={`${++index}`} variant="WhiteHead">
+              <p set:html={caixa.content} />
+            </Box>
+          ))
+        }
+      </div>
+    </Slide>
+  </Container>
+</Layout>

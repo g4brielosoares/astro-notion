@@ -1,0 +1,14 @@
+---
+import type { Props } from "./index.astro";
+
+const { title, class: className, index } = Astro.props;
+---
+
+<article class:list={[className, "space-y-3"]}>
+  <div class="font-jetbrains leading-none text-xl font-normal text-white">
+    {index}
+  </div>
+  <div class="w-full h-0.5 bg-linear-to-r from-[#DE386B] to-[#E93FF1]"></div>
+  {title && <h4 class="text-white text-2xl">{title}</h4>}
+  <slot />
+</article>

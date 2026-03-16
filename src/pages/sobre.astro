@@ -1,0 +1,65 @@
+---
+import PostLayout from "@/layouts/PostLayout.astro";
+import cover from "@/assets/sobre.jpg";
+---
+
+<PostLayout
+  title="Sobre o Astro"
+  description="O que é Astro?"
+  publishedAt={new Date("01/08/2005")}
+  cover={cover}
+>
+  <p>
+    Astro é um framework moderno para criação de sites e aplicações web com foco
+    principal em performance, organização e flexibilidade. Ele foi pensado para
+    entregar páginas mais rápidas, com menos JavaScript enviado ao navegador por
+    padrão, o que melhora a experiência do usuário e ajuda bastante em projetos
+    institucionais, blogs, landing pages e até estruturas mais robustas.
+  </p>
+  <p>
+    Uma das maiores vantagens do Astro é a sua abordagem de conteúdo-first. Isso
+    significa que ele funciona muito bem para projetos em que o desempenho, o
+    SEO e a renderização rápida são prioridades. Em vez de carregar componentes
+    interativos o tempo todo sem necessidade, o Astro permite enviar apenas o
+    essencial para cada página, mantendo o site mais leve e eficiente.
+  </p>
+  <p>
+    Outro ponto forte é a flexibilidade na construção da interface. Com Astro, é
+    possível trabalhar com uma arquitetura mais limpa e reutilizável, separando
+    bem layout, seções, componentes e conteúdo. Isso facilita a manutenção do
+    projeto, melhora a escalabilidade e ajuda bastante quando existem páginas
+    com estruturas parecidas, mas com variações de texto, blocos ou organização
+    visual.
+  </p>
+  <p>
+    O Astro também se destaca por permitir integração com diferentes tecnologias
+    de frontend. Ele pode conviver com componentes de React, Vue, Svelte e
+    outras bibliotecas no mesmo projeto, o que dá liberdade para usar
+    interatividade apenas onde realmente faz sentido. Na prática, isso ajuda a
+    evitar excesso de complexidade e permite escolher a ferramenta certa para
+    cada parte da interface.
+  </p>
+  <p>
+    Em projetos profissionais, outra vantagem importante é a experiência de
+    desenvolvimento. O Astro oferece uma estrutura intuitiva, boa organização de
+    rotas, suporte a conteúdo dinâmico, geração estática e renderização no
+    servidor quando necessário. Isso permite criar desde páginas simples até
+    soluções mais completas, mantendo clareza no código e boa previsibilidade no
+    crescimento do projeto.
+  </p>
+  <p>
+    Além disso, o Astro é uma excelente escolha para quem busca boas práticas de
+    performance e SEO desde a base. Sites feitos com ele tendem a ter
+    carregamento mais rápido, melhor pontuação em métricas de experiência e mais
+    controle sobre o que realmente é renderizado na página. Para negócios que
+    dependem de presença digital forte, isso representa uma vantagem real tanto
+    na usabilidade quanto na visibilidade nos mecanismos de busca.
+  </p>
+  <p>
+    De forma geral, o Astro é uma solução muito interessante para quem quer
+    construir projetos web modernos com mais desempenho, organização e controle
+    técnico. Ele combina bem com fluxos de trabalho mais estruturados, favorece
+    reutilização de componentes e ajuda a criar interfaces mais enxutas,
+    profissionais e preparadas para evoluir com consistência.
+  </p>
+</PostLayout>

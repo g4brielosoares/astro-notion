@@ -1,0 +1,25 @@
+---
+import type { Props } from "./index.astro";
+
+const { title, class: className, index = 0 } = Astro.props;
+---
+
+<article class:list={[className, "relative mt-7 flex flex-col"]}>
+  <div
+    class="size-16 flex items-center justify-center rounded-full absolute left-1/2 -translate-x-1/2 -translate-y-3/7 bg-linear-to-r from-[#DE386B] to-[#E93FF1]"
+  >
+    <span class="text-3xl font-bold text-black leading-none">
+      {index}
+    </span>
+  </div>
+  <div
+    class="w-full h-4 rounded-t-lg bg-linear-to-r from-[#DE386B] to-[#E93FF1]"
+  >
+  </div>
+  <div
+    class="p-5 pt-10 space-y-5 border-[#4E4855] rounded-b-lg border-2 border-t-0 grow"
+  >
+    {title && <h4 class="text-white text-2xl">{title}</h4>}
+    <slot />
+  </div>
+</article>

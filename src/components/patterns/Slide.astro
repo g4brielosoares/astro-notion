@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+import SlideIndicator from "@/components/primitives/layout/SlideIndicator.astro";
+
+interface Props {
+  title?: string;
+  imageSRC?: string;
+  imgSide?: "left" | "right";
+  indicatorText?: string;
+}
+
+const { title, imageSRC, imgSide = "right", indicatorText } = Astro.props;
+
+const isLeft = imgSide === "left" && true;
+---
+
+<section
+  class="relative overflow-hidden w-full bg-[#20132CAA] rounded-2xl text-white border-2 border-[#DE386B]"
+>
+  <div
+    class:list={[
+      "p-6 md:py-10 md:px-12 flex flex-col gap-6 max-w-full",
+      { "max-md:mb-120 md:w-1/2": imageSRC },
+      isLeft ? "md:ml-auto" : "md:mr-auto",
+    ]}
+  >
+    <SlideIndicator>{indicatorText}</SlideIndicator>
+    <h2>{title}</h2>
+    <slot />
+    {
+      imageSRC && (
+        <div
+          class:list={[
+            "absolute md:top-0 bottom-0 w-full h-120 md:h-full md:w-1/2",
+            isLeft ? "left-0" : "right-0",
+          ]}
+        >
+          <Image
+            width="1"
+            height="1"
+            loading="lazy"
+            decoding="async"
+            src={imageSRC}
+            alt=""
+            class="object-cover object-center h-full w-full"
+          />
+          <div
+            class:list={[
+              "absolute inset-0 from-[#181021] from-0% to-transparent to-100%",
+              isLeft ? "bg-linear-to-l" : "bg-linear-to-r",
+              "max-md:bg-linear-to-b",
+            ]}
+          />
+        </div>
+      )
+    }
+  </div>
+</section>

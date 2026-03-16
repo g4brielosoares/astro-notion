@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Default from "./Default.astro";
+import Naked from "./Naked.astro";
+import NumberCircle from "./NumberCircle.astro";
+import NumberLine from "./NumberLine.astro";
+import WhiteHead from "./WhiteHead.astro";
+
+const variantsMap = {
+  Default,
+  Naked,
+  NumberCircle,
+  NumberLine,
+  WhiteHead,
+};
+
+export type Variants = keyof typeof variantsMap;
+
+export interface Props extends HTMLAttributes<"article"> {
+  title?: string;
+  variant?: Variants;
+  index?: string | number;
+}
+
+const { variant = "Default", ...rest } = Astro.props;
+
+const Variant = variantsMap[variant];
+---
+
+<Variant {...rest}>
+  <slot />
+</Variant>

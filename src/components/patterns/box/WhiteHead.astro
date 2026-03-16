@@ -1,0 +1,24 @@
+---
+import type { Props } from "./index.astro";
+
+const { title, class: className, index } = Astro.props;
+---
+
+<article
+  class:list={[
+    className,
+    "rounded-lg overflow-hidden border-[#4E4855] border-2",
+  ]}
+>
+  {
+    title && (
+      <div class:list={[{ "text-center": index }, "bg-[#4E4855]"]}>
+        <h3 class="text-white p-5 text-2xl">{index ? index : title}</h3>
+      </div>
+    )
+  }
+  <div class="p-5 space-y-5">
+    {title && index && <h5 class="text-white text-2xl">{title}</h5>}
+    <slot />
+  </div>
+</article>

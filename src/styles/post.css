@@ -1,0 +1,65 @@
+@import "./global.css";
+
+/* Suporte para classes de markdown (Astro <Content />) */
+
+h3,
+h4,
+h5,
+h6 {
+  @apply text-white;
+}
+
+h2 {
+  @apply text-3xl md:text-5xl;
+}
+h3 {
+  @apply text-2xl md:text-4xl;
+}
+h4 {
+  @apply text-xl md:text-3xl;
+}
+h5 {
+  @apply text-lg md:text-2xl;
+}
+h6 {
+  @apply text-base md:text-xl;
+}
+
+h2 > code,
+h3 > code {
+  @apply text-3xl;
+}
+
+ul,
+ol {
+  @apply pl-10;
+}
+
+img {
+  @apply max-w-full h-auto rounded-xl m-auto;
+}
+
+code {
+  @apply py-0.5 px-1 bg-[#24292E] text-white rounded-sm font-jetbrains text-sm;
+}
+
+pre {
+  @apply p-5 rounded-lg overflow-x-auto bg-[#24292E];
+}
+
+pre > code {
+  @apply p-0 bg-transparent rounded-none text-inherit;
+}
+
+blockquote {
+  @apply border-l-2 border-accent pl-5 text-xl italic;
+}
+
+hr {
+  @apply border-t-2 border-white my-15;
+}
+
+input,
+textarea {
+  @apply w-full p-5 border-0 rounded-lg overflow-x-auto bg-[#24292E];
+}

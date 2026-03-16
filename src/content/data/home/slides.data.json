@@ -1,0 +1,140 @@
+{
+    "Slide1": [
+        {
+            "title": "O Problema",
+            "content": "Hoje, sites são pesados e carregam JavaScript desnecessário."
+        },
+        {
+            "title": "A Consequência",
+            "content": "Sites lentos afastam clientes e são punidos pelo Google (SEO ruim)."
+        },
+        {
+            "title": "A Solução",
+            "content": "Astro, o framework projetado para entregar velocidade máxima sem esforço."
+        },
+        {
+            "content": "O <strong>Astro</strong> é um framework focado em performance que prioriza o envio de <strong>HTML puro</strong> para o navegador, eliminando JavaScript desnecessário para garantir carregamento instantâneo e SEO superior. Através da <strong>Arquitetura de Ilhas</strong>, ele permite integrar componentes de React, Vue ou Svelte apenas onde a interatividade é essencial, sendo a solução mais ágil e versátil para construir Landing Pages e sites institucionais de alta conversão.",
+            "className": "col-span-1 md:col-span-3",
+            "variant": "WhiteHead"
+        }
+    ],
+    "Slide3": [
+        {
+            "title": "Conteúdo Visível",
+            "content": "Como o Astro gera páginas estáticas, os robôs de busca (Google) leem todo o seu conteúdo instantaneamente."
+        },
+        {
+            "title": "Core Web Vitals",
+            "content": "O Astro é otimizado nativamente para passar em todos os testes de qualidade do Google."
+        },
+        {
+            "title": "URLs Canônicas e Metadados",
+            "content": "Gerenciamento simplificado para garantir que sua marca apareça no topo das buscas."
+        }
+    ],
+    "Slide4": [
+        {
+            "title": "Liberdade Total",
+            "content": "Você não precisa escolher entre React, Vue ou Svelte. O Astro permite usar todos eles no mesmo projeto."
+        },
+        {
+            "title": "Design com Tailwind",
+            "content": "Integração nativa com Tailwind CSS para criar visuais modernos e responsivos em tempo recorde."
+        },
+        {
+            "title": "Sem Barreiras",
+            "content": "Se sua equipe já conhece uma ferramenta, ela já sabe usar Astro."
+        }
+    ],
+    "Slide5": [
+        {
+            "title": "Simplicidade de Pastas",
+            "content": "Criar uma nova página é tão fácil quanto criar um arquivo. Criou sobre.astro? A página seusite.com/sobre já existe."
+        },
+        {
+            "title": "Rotas Dinâmicas",
+            "content": "Ideal para Blogs ou Catálogos. Com um único modelo, você gera centenas de páginas (ex: /blog/post-1, /blog/post-2)."
+        },
+        {
+            "title": "Organização Intuitiva",
+            "content": "Menos código de configuração, mais foco no conteúdo."
+        }
+    ],
+    "Slide6": [
+        {
+            "title": "O que é?",
+            "content": "Imagine um oceano de conteúdo estático (rápido) com pequenas ilhas de interatividade."
+        },
+        {
+            "title": "Como funciona",
+            "content": "Apenas os componentes que precisam de ação (como um formulário ou um carrossel) carregam código. O resto do site permanece leve como uma pena."
+        },
+        {
+            "title": "Vantagem",
+            "content": "O usuário interage com o que importa, enquanto o site carrega instantaneamente ao fundo.",
+            "className": "md:row-span-2"
+        }
+    ],
+    "Slide7": [
+        {
+            "title": "Pre-rendering",
+            "content": "No momento de publicar, o Astro transforma todo o seu projeto em arquivos HTML, CSS e imagens simples."
+        },
+        {
+            "title": "Segurança",
+            "content": "Sites estáticos são muito mais difíceis de serem invadidos, pois não possuem banco de dados exposto."
+        },
+        {
+            "title": "Hospedagem Barata",
+            "content": "Podem ser hospedados em qualquer lugar (Vercel, Netlify, Cloudflare) por um custo quase zero."
+        }
+    ],
+    "Slide8": [
+        {
+            "title": "Performance \"Extrema\" (O fim da lentidão)",
+            "content": "<ul><li><strong>WordPress:</strong> Carrega banco de dados e dezenas de plugins, gerando atraso no carregamento.</li><li><strong>Astro:</strong> Entrega apenas HTML puro, site nasce \"leve como uma pena\". Google recompensa com melhores posições.</li></ul>"
+        },
+        {
+            "title": "Segurança Blindada",
+            "content": "<ul><li><strong>WordPress:</strong> Alvo nº 1 de hackers devido ao banco de dados exposto. Exige plugins e atualizações constantes.</li><li><strong>Astro:</strong> Sem banco de dados exposto ou \"área de login\" vulnerável. Virtualmente impossível de invadir por técnicas comuns.</li></ul>"
+        },
+        {
+            "title": "Componentização: O Lego da Web",
+            "content": "<ul><li><strong>WordPress:</strong> Preso ao que o \"Tema\" permite. Personalização limitada.</li><li><strong>Astro:</strong> Componentes reutilizáveis para personalização sem limites. Altere um componente e atualize todo o site em segundos.</li></ul>"
+        },
+        {
+            "title": "Amizade Total com a Inteligência Artificial",
+            "content": "<ul><li><strong>WordPress:</strong> Código \"macarrônico\" dificulta a atuação da IA.</li><li><strong>Astro:</strong> Código limpo e modular. IAs (ChatGPT, Copilot) auxiliam na criação e correção de bugs, acelerando o desenvolvimento em até 5x.</li></ul>"
+        },
+        {
+            "title": "Liberdade de Ferramentas (Multiframework)",
+            "content": "<ul><li><strong>WordPress:</strong> Preso ao PHP.</li><li><strong>Astro:</strong> Use React, Vue, Svelte e outras tecnologias juntas no mesmo projeto. Uma caixa de ferramentas onde tudo se encaixa.</li></ul>"
+        },
+        {
+            "title": "Custo de Manutenção e Hospedagem",
+            "content": "<ul><li><strong>WordPress:</strong> Servidores caros e otimizados. Risco de \"Taxa de Quebra\" por plugins.</li><li><strong>Astro:</strong> Hospedagem gratuita ou irrisória em redes globais (Edge Computing). Build verificado antes de ir ao ar, sem quebras inesperadas.</li></ul>"
+        }
+    ],
+    "SlideFAQ": [
+        {
+            "title": "O Astro é melhor que o WordPress?",
+            "content": "Para sites institucionais e LPs, sim. Enquanto o WordPress é pesado e depende de dezenas de plugins que lentificam o site, o Astro é focado em performance pura. O resultado é um site que carrega instantaneamente, oferece melhor segurança (sem banco de dados exposto) e um SEO muito superior."
+        },
+        {
+            "title": "Se o site é \"estático\", eu ainda consigo atualizar o conteúdo?",
+            "content": "Com certeza! O Astro integra-se perfeitamente com CMS Headless (como Sanity, Strapi ou Contentful). Isso significa que você ou sua equipe podem editar textos e imagens em um painel amigável, e o Astro atualiza o site automaticamente."
+        },
+        {
+            "title": "Como o Astro ajuda a diminuir meus custos com anúncios (Google Ads/Meta Ads)?",
+            "content": "Plataformas de anúncios cobram mais caro por cliques que levam a páginas lentas (baixa pontuação de experiência). Como o Astro é extremamente rápido, sua \"Nota de Qualidade\" sobe, o que pode reduzir o custo por clique (CPC) e aumentar a taxa de conversão, já que o usuário não desiste da página enquanto ela carrega."
+        },
+        {
+            "title": "Preciso de uma hospedagem cara para rodar um site em Astro?",
+            "content": "Pelo contrário. Como o Astro gera arquivos estáticos, ele pode ser hospedado em infraestruturas globais de alta performance (como Vercel ou Netlify) que possuem planos gratuitos ou extremamente baratos para sites institucionais."
+        },
+        {
+            "title": "O site vai funcionar bem em celulares com internet lenta?",
+            "content": "Essa é a maior força do Astro. Graças à sua Arquitetura de Ilhas, ele entrega o conteúdo visual primeiro e só carrega a interatividade necessária depois. É a tecnologia ideal para o público que acessa via 4G/5G em dispositivos móveis."
+        }
+    ]
+}

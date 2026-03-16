@@ -1,0 +1,6 @@
+---
+import RenderNode from "./RenderNode.astro";
+const { nodes = [] } = Astro.props;
+---
+
+{nodes.map((node: any) => <RenderNode node={node} />)}

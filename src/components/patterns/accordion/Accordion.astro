@@ -1,0 +1,45 @@
+---
+interface Props {
+  className?: string;
+  allowMultiple?: boolean;
+  variant?: "rounded" | "bottom";
+}
+
+const { className, allowMultiple = false, variant = "rounded" } = Astro.props;
+---
+
+<div
+  class={`accordion-root w-full group/root ${className}`}
+  data-allow-multiple={allowMultiple}
+  data-variant={variant}
+>
+  <slot />
+</div>
+
+<script>
+  function setupAccordion() {
+    const roots = document.querySelectorAll(".accordion-root");
+
+    roots.forEach((root) => {
+      const isMultiple = root.getAttribute("data-allow-multiple") === "true";
+      const items = root.querySelectorAll(".accordion-item");
+
+      items.forEach((item) => {
+        const trigger = item.querySelector(".accordion-trigger");
+
+        trigger?.addEventListener("click", () => {
+          const isOpen = item.getAttribute("data-state") === "open";
+
+          if (!isMultiple && !isOpen) {
+            items.forEach((i) => i.setAttribute("data-state", "closed"));
+          }
+
+          item.setAttribute("data-state", isOpen ? "closed" : "open");
+        });
+      });
+    });
+  }
+
+  setupAccordion();
+  document.addEventListener("astro:after-swap", setupAccordion);
+</script>
