@@ -1,4 +1,4 @@
-# Astro Boy
+# Astro - Notion
 
 Site em Astro com foco em performance, SEO e organização de conteúdo. O projeto combina uma landing page em formato de apresentação, páginas institucionais e um blog estático cuja fonte de conteúdo é sincronizada a partir do Notion.
 
