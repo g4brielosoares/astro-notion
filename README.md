@@ -1,133 +1,146 @@
 # Astro Boy
 
-Projeto em Astro focado em demonstrar performance, SEO e organização de conteúdo com uma home em formato de slides, blog local em Markdown e blog integrado ao Notion como CMS headless.
+Site em Astro com foco em performance, SEO e organização de conteúdo. O projeto combina uma landing page em formato de apresentação, páginas institucionais e um blog estático cuja fonte de conteúdo é sincronizada a partir do Notion.
 
-## Visão geral
+## O que o projeto faz hoje
 
-O projeto reúne três frentes principais:
-
-- landing page institucional com seções em formato de apresentação;
-- blog local usando `astro:content`;
-- blog dinâmico com Notion, incluindo cache de assets, rotas de mídia e webhook para invalidação/atualização.
+- Renderiza uma home com seções em estilo "slides", montadas com componentes reutilizáveis.
+- Mantém uma página institucional em formato de artigo.
+- Gera um blog estático com `astro:content`.
+- Sincroniza posts do Notion para `src/content/blog` antes do build.
+- Baixa automaticamente capas e imagens remotas dos posts sincronizados.
+- Expõe um endpoint JSON para inspecionar a fonte de dados do Notion.
+- Expõe um webhook para acionar novo deploy na Vercel quando houver mudanças no Notion.
+- Publica RSS e sitemap.
 
 ## Stack
 
 - Astro 6
 - TypeScript
 - Tailwind CSS 4 via Vite
-- MDX
 - `astro:content`
-- Notion API (`@notionhq/client`)
-- RSS e Sitemap
-- Adapter da Vercel
-
-## Funcionalidades
-
-- Home baseada em componentes reutilizáveis e conteúdo desacoplado em JSON.
-- Blog local com posts em Markdown e rotas dinâmicas por slug.
-- Integração com Notion para listar e renderizar posts publicados.
-- Cache local de capas e imagens vindas do Notion.
-- Webhook para invalidar cache e aquecer conteúdo após mudanças no Notion.
-- Feed RSS para o blog local.
-- SEO básico com metatags, canonical e Open Graph.
+- `astro:assets`
+- Notion API
+- `notion-to-md`
+- Vercel adapter
+- RSS e sitemap
 
 ## Rotas principais
 
-- `/`: página inicial com a apresentação sobre Astro.
-- `/sobre`: página institucional em layout de post.
-- `/blog`: listagem do blog local.
-- `/blog/[slug]`: post do blog local.
-- `/blog-notion`: listagem de posts do Notion.
-- `/blog-notion/[slug]`: post renderizado a partir do Notion.
-- `/rss.xml`: feed RSS do blog local.
-- `/api/notion-webhook`: endpoint para atualização de cache via webhook do Notion.
-- `/media/notion/cover/[pageId]`: entrega de capas processadas do Notion.
-- `/media/notion/block/[pageId]/[blockId]`: entrega de assets de blocos do Notion.
+- `/`: landing page principal
+- `/sobre`: página institucional
+- `/blog`: listagem de posts publicados
+- `/blog/[slug]`: página estática de post
+- `/posts.json`: resposta bruta da consulta ao Notion
+- `/api/notion-webhook`: webhook para disparar deploy
+- `/rss.xml`: feed RSS do blog
 
-## Conteúdo e arquitetura
+## Fluxo de conteúdo
 
-### Home
+O conteúdo do blog é gerado a partir do Notion por meio do script `scripts/sync-notion.mjs`.
 
-A home consome os dados de `src/content/data/home/slides.data.json` e distribui o conteúdo em componentes como `Slide`, `Box` e `Accordion`.
+Esse script:
 
-### Blog local
+- consulta a data source configurada no Notion;
+- converte páginas para Markdown;
+- baixa capas e imagens remotas;
+- gera frontmatter compatível com `astro:content`;
+- recria a pasta `src/content/blog`.
 
-Os posts ficam em `src/content/blog` e são validados pelo schema definido em `src/content.config.ts`.
+Importante: o comando `npm run build` executa `prebuild`, e o `prebuild` roda `npm run content:sync`. Na prática, isso significa que `src/content/blog` é apagada e regenerada antes de cada build.
 
-### Notion CMS
+## Variáveis de ambiente
 
-A integração com Notion fica centralizada em `src/lib/notion`, cobrindo:
+Use o arquivo `.env.example` como base:
 
-- consulta e transformação de posts;
-- renderização de blocos;
-- gerenciamento de cache;
-- download e derivação de imagens;
-- limpeza e reaquecimento de conteúdo.
+```env
+NOTION_TOKEN=
+NOTION_DATA_SOURCE_ID=
+SITE_URL=
+NOTION_WEBHOOK_VERIFICATION_TOKEN=
+VERCEL_DEPLOY_HOOK_URL=
+```
+
+### O que cada variável faz
+
+- `NOTION_TOKEN`: token da integração do Notion.
+- `NOTION_DATA_SOURCE_ID`: ID da data source usada para buscar os posts.
+- `SITE_URL`: URL canônica do site usada pelo Astro.
+- `NOTION_WEBHOOK_VERIFICATION_TOKEN`: token usado para validar a assinatura do webhook.
+- `VERCEL_DEPLOY_HOOK_URL`: hook chamado quando o webhook recebe eventos relevantes.
 
 ## Scripts
 
 ```bash
 npm install
 npm run dev
+npm run content:sync
 npm run build
 npm run preview
 ```
 
-## Variáveis de ambiente
+### Resumo dos scripts
 
-Crie um `.env` com:
+- `npm run dev`: inicia o ambiente local.
+- `npm run content:sync`: sincroniza posts do Notion para `src/content/blog`.
+- `npm run build`: sincroniza conteúdo e gera o site estático.
+- `npm run preview`: serve localmente o build gerado.
 
-```env
-NOTION_TOKEN=
-NOTION_DATA_SOURCE_ID=
-NOTION_WEBHOOK_SECRET=
-```
+## Modelo de post
 
-## Estrutura de pastas
+Os posts renderizados pelo blog seguem o schema definido em `src/content.config.ts`:
+
+- `title`
+- `slug`
+- `status`
+- `author`
+- `tags`
+- `pubDate`
+- `updatedDate`
+- `cover`
+- `coverAlt`
+
+Somente posts com `status` igual a `Publicado` aparecem na listagem e têm página gerada.
+
+## Estrutura resumida
 
 ```text
-Astro-Boy/
+.
 ├── public/
+│   ├── favicon.ico
+│   ├── favicon.svg
 │   └── fonts/
-├── cache/
-│   └── notion/
-│       └── assets/
-│           ├── block/
-│           │   ├── derived/
-│           │   └── original/
-│           └── cover/
-│               ├── derived/
-│               └── original/
+├── scripts/
+│   └── sync-notion.mjs
 └── src/
     ├── assets/
     ├── components/
-    │   ├── Accordion/
-    │   ├── Box/
-    │   └── notion/
+    │   ├── patterns/
+    │   └── primitives/
     ├── config/
     ├── content/
     │   ├── blog/
-    │   └── data/
-    │       └── home/
+    │   └── data/home/
     ├── layouts/
-    ├── lib/
-    │   └── notion/
     ├── pages/
     │   ├── api/
-    │   ├── blog/
-    │   ├── blog-notion/
-    │   └── media/
-    │       └── notion/
-    │           ├── block/
-    │           │   └── [pageId]/
-    │           └── cover/
+    │   └── blog/
     └── styles/
 ```
 
-## Observações
+## Organização da interface
 
-- A URL configurada no Astro está em `https://astro-boy.vercel.app`.
-- O layout base está em `src/layouts/Layout.astro`.
-- O layout de posts está em `src/layouts/PostLayout.astro`.
-- A navegação principal expõe `Sobre`, `Blog` e `Notion`.
-- Pastas geradas como `.astro`, `dist`, `.vercel` e `node_modules` foram omitidas da árvore por não fazerem parte da estrutura-fonte do projeto.
+- `src/pages/index.astro`: monta a landing page usando os dados de `src/content/data/home/slides.data.json`.
+- `src/layouts/Layout.astro`: layout base do site.
+- `src/layouts/PostLayout.astro`: layout das páginas de conteúdo e posts.
+- `src/components/patterns/`: componentes de interface como `Slide`, `Box`, `Accordion`, `Header` e `Footer`.
+
+## Deploy
+
+O projeto está configurado com `@astrojs/vercel` e `output: "static"`. O webhook em `/api/notion-webhook` foi pensado para receber eventos do Notion e acionar um novo deploy na Vercel.
+
+## Observações importantes
+
+- O blog não consome o Notion em tempo real no frontend; ele é gerado estaticamente a partir da sincronização.
+- O endpoint `/posts.json` serve como utilitário de inspeção da resposta do Notion.
+- Se você mantiver posts manuais dentro de `src/content/blog`, eles podem ser sobrescritos pelo processo de sync.
