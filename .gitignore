@@ -12,7 +12,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
@@ -24,8 +23,5 @@ pnpm-debug.log*
 .idea/
 .vercel
 
-# cache
-cache/notion/cover/original/*
-cache/notion/cover/derived/*
-!cache/notion/cover/original/.gitkeep
-!cache/notion/cover/derived/.gitkeep
+# content
+src/content/blog/**
