@@ -10,7 +10,7 @@ import placeholder from "@/assets/post-placeholder.png";
 
 export type Props = {
   title: string;
-  slug?: string;
+  slug: string;
   description?: string;
   pubDate: Date;
   updatedDate?: Date;
@@ -22,6 +22,7 @@ export type Props = {
 
 const {
   title,
+  slug,
   pubDate,
   description,
   updatedDate,
@@ -44,6 +45,7 @@ const {
             decoding="async"
             format="webp"
             class="w-full aspect-video object-cover object-center xl:rounded-xl"
+            transition:name={`${slug}-cover`}
           />
         )
       }
@@ -55,7 +57,11 @@ const {
           {
             pubDate && (
               <div>
-                Criado em <FormattedDate date={pubDate} />
+                Criado em{" "}
+                <FormattedDate
+                  date={pubDate}
+                  transition:name={`${slug}-pubDate`}
+                />
               </div>
             )
           }
@@ -71,7 +77,7 @@ const {
       </figcaption>
     </figure>
     <Container class="space-y-6 max-w-200!">
-      <h1 class="text-center">{title}</h1>
+      <h1 class="text-center" transition:name={`${slug}-title`}>{title}</h1>
       {
         tags.length > 0 && (
           <div class="flex flex-wrap justify-center gap-2">

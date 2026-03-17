@@ -17,11 +17,7 @@ const { title, description, imageURL } = Astro.props;
     <BaseHead {title} {description} {imageURL} />
   </head>
   <body class="bg-zinc-950 text-white font-atkinson leading-normal">
-    <Header
-      transition:name="header"
-      transition:animate="fade"
-      transition:persist
-    />
+    <Header transition:name="header" transition:animate="fade" />
     <main>
       <slot />
     </main>
