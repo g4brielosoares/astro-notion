@@ -25,7 +25,10 @@ const {
   <a href={"/blog/" + slug}>
     {
       cover && (
-        <div class="overflow-hidden rounded-xl aspect-5/3 transition duration-400">
+        <div
+          class="overflow-hidden rounded-xl aspect-5/3 transition duration-400"
+          transition:name={`${slug}-cover`}
+        >
           <Image
             width={480}
             src={cover}
@@ -34,7 +37,6 @@ const {
             loading="lazy"
             format="webp"
             class="scale-105 group-hover:scale-100 transition duration-400 object-cover w-full h-full"
-            transition:name={`${slug}-cover`}
           />
         </div>
       )
