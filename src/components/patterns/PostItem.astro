@@ -3,6 +3,7 @@ import FormattedDate from "@/components/primitives/content/FormattedDate.astro";
 import placeholder from "@/assets/post-placeholder.png";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import Tags from "./Tags.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -16,6 +17,7 @@ const {
   pubDate,
   cover = placeholder,
   coverAlt = title,
+  tags,
 } = post.data;
 ---
 
@@ -43,6 +45,7 @@ const {
     }
     <div class="p-3 md:p-4 space-y-1 md:space-y-2">
       <h4 transition:name={`${slug}-title`}>{title}</h4>
+      <Tags tags={tags} />
       <p class="text-sm md:text-lg">
         <FormattedDate date={pubDate} />
       </p>
