@@ -57,11 +57,7 @@ const {
           {
             pubDate && (
               <div>
-                Criado em{" "}
-                <FormattedDate
-                  date={pubDate}
-                  transition:name={`${slug}-pubDate`}
-                />
+                Criado em <FormattedDate date={pubDate} />
               </div>
             )
           }
