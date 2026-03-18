@@ -2,15 +2,13 @@
 import FormattedDate from "@/components/primitives/content/FormattedDate.astro";
 import placeholder from "@/assets/post-placeholder.png";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  title: string;
-  slug: string;
-  pubDate: Date;
-  cover?: ImageMetadata;
-  coverAlt?: string;
+  post: CollectionEntry<"blog">;
 }
+
+const { post } = Astro.props;
 
 const {
   title,
@@ -18,7 +16,7 @@ const {
   pubDate,
   cover = placeholder,
   coverAlt = title,
-} = Astro.props;
+} = post.data;
 ---
 
 <article
