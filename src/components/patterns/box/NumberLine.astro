@@ -1,14 +1,14 @@
 ---
-import type { Props } from "./index.astro";
+import type { Props } from "./Box.astro";
 
 const { title, class: className, index } = Astro.props;
 ---
 
 <article class:list={[className, "space-y-3"]}>
-  <div class="font-jetbrains leading-none text-xl font-normal text-white">
+  <div class="text-xl font-normal leading-none text-white font-jetbrains">
     {index}
   </div>
   <div class="w-full h-0.5 bg-linear-to-r from-[#DE386B] to-[#E93FF1]"></div>
-  {title && <h4 class="text-white text-2xl">{title}</h4>}
+  {title && <h4 class="text-2xl text-white">{title}</h4>}
   <slot />
 </article>

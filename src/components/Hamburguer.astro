@@ -1,0 +1,48 @@
+<button class="btn" id="hbtn" aria-label="Abrir menu">
+    <div class="hamburger" id="hburger">
+        <span class="bar bar-top"></span>
+        <span class="bar bar-mid"></span>
+        <span class="bar bar-bot"></span>
+    </div>
+</button>
+
+<style>
+    .btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 12px;
+    }
+    .bar {
+        display: block;
+        width: 28px;
+        height: 2.5px;
+        border-radius: 2px;
+        background: currentColor;
+        transition:
+            transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.2s ease;
+        transform-origin: center;
+    }
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .hamburger.open .bar-top {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    .hamburger.open .bar-mid {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .hamburger.open .bar-bot {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+</style>
+
+<script>
+    const btn = document.getElementById("hbtn");
+    const hb = document.getElementById("hburger");
+    btn?.addEventListener("click", () => hb?.classList.toggle("open"));
+</script>

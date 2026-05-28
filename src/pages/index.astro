@@ -4,11 +4,16 @@ import Slide from "@/components/patterns/Slide.astro";
 import Layout from "@/layouts/Layout.astro";
 import Accordion from "@/components/patterns/accordion/Accordion.astro";
 import AccordionItem from "@/components/patterns/accordion/AccordionItem.astro";
-import logoG from "@/assets/logo-g.svg";
 
 import SlidesData from "@/content/data/home/slides.data.json";
-import { Image } from "astro:assets";
 import Container from "@/components/primitives/layout/Container.astro";
+import NumberLine from "@/components/patterns/box/NumberLine.astro";
+
+import ComponentDisplay from "@/components/patterns/ComponentDisplay.astro";
+import NumberLineRaw from "@/components/patterns/box/NumberLine.astro?raw";
+import AstroSvg from "@/components/AstroSvg.astro";
+import HausSvg from "@/components/HausSvg.astro";
+import Hamburguer from "@/components/Hamburguer.astro";
 
 interface Content {
   title?: string;
@@ -20,15 +25,23 @@ interface Content {
 
 <Layout>
   <Container class="space-y-6 md:space-y-10 py-30">
-    <Image
-      width="1000"
-      src={logoG}
-      alt="astro"
-      class="mx-auto my-30 xl:my-50"
-    />
+    <Hamburguer />
+    <HausSvg />
+    <AstroSvg />
+
+    <ComponentDisplay title="NumberLine" code={NumberLineRaw}>
+      <NumberLine title="Lorem" index={"01"}>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+          nulla dolores qui non. Provident nostrum ipsa magni voluptatibus,
+          asperiores laborum non, natus deserunt laudantium enim, perspiciatis
+          hic dolorem ipsum ipsam!
+        </p>
+      </NumberLine>
+    </ComponentDisplay>
 
     <Slide title="O Desafio" indicatorText="Slide 1">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         {
           (SlidesData.Slide1 as Content[]).map((caixa) => (
             <Box
@@ -47,7 +60,7 @@ interface Content {
         </AccordionItem>
         <AccordionItem title="Posso usar componentes dinâmicos?">
           <p class="mb-2">Sim! Veja este componente sendo injetado:</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
             {
               (SlidesData.Slide3 as Content[]).map((caixa) => (
                 <Box
@@ -65,14 +78,14 @@ interface Content {
           <img
             src="https://picsum.photos/400/200"
             alt="Exemplo"
-            class="rounded-lg mt-2"
+            class="mt-2 rounded-lg"
           />
         </AccordionItem>
       </Accordion>
     </Slide>
 
     <Slide title="Por que o Astro é tão Ágil?" indicatorText="Slide 2">
-      <ul class="space-y-5 text-2xl pl-10">
+      <ul class="pl-10 space-y-5 text-2xl">
         <li>
           <strong>Filosofia "Zero JavaScript":</strong> O Astro remove todo o código
           pesado e envia apenas HTML puro para o navegador.
@@ -89,7 +102,7 @@ interface Content {
     </Slide>
 
     <Slide title="SEO: O Melhor Amigo do Google" indicatorText="Slide 3">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
         {
           (SlidesData.Slide3 as Content[]).map((caixa) => (
             <Box
@@ -108,7 +121,7 @@ interface Content {
       title="Versatilidade: Use o Melhor de Cada Mundo"
       indicatorText="Slide 4"
     >
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
         {
           (SlidesData.Slide4 as Content[]).map((caixa, index) => (
             <Box
@@ -152,7 +165,7 @@ interface Content {
       indicatorText="Slide 6"
     >
       <div
-        class="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 md:grid-flow-col gap-5 justify-center items-center"
+        class="grid items-center justify-center grid-cols-1 grid-rows-1 gap-5 md:grid-cols-2 md:grid-rows-2 md:grid-flow-col"
       >
         {
           (SlidesData.Slide6 as Content[]).map((caixa) => (
@@ -165,7 +178,7 @@ interface Content {
     </Slide>
 
     <Slide title="Criação de Páginas Estáticas (Build)" indicatorText="Slide 7">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
         {
           (SlidesData.Slide7 as Content[]).map((caixa) => (
             <Box title={caixa.title} class={caixa.className} variant="Naked">
@@ -185,7 +198,7 @@ interface Content {
         exige manutenção constante, por um veículo de corrida moderno, leve e
         totalmente personalizado.
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
         {
           (SlidesData.Slide8 as Content[]).map((caixa, index) => (
             <Box
@@ -249,7 +262,7 @@ interface Content {
       title="Desvendando o Astro: FAQ"
       indicatorText="Perguntas Frequentes"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
         {
           (SlidesData.SlideFAQ as Content[]).map((caixa, index) => (
             <Box title={caixa.title} index={`${++index}`} variant="WhiteHead">
