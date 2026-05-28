@@ -6,6 +6,15 @@ on:
       - main
 
   workflow_dispatch:
+    inputs:
+      source:
+        description: "Origem do deploy"
+        required: false
+        default: "manual"
+      event_type:
+        description: "Tipo de evento"
+        required: false
+        default: "manual"
 
 jobs:
   deploy:
