@@ -1,0 +1,36 @@
+name: Deploy Node.js na Cloudez
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Origem do deploy"
+        required: false
+        default: "manual"
+      event_type:
+        description: "Tipo de evento"
+        required: false
+        default: "manual"
+
+jobs:
+  deploy:
+    name: Rodar deploy no servidor
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/server_key
+          chmod 600 ~/.ssh/server_key
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Executar deploy remoto
+        run: |
+          ssh -i ~/.ssh/server_key \
+            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" \
+            "bash ~/deploy.sh"
